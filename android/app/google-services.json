@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "702324940608",
+    "project_id": "on-spot-mechanic-3f5ac",
+    "storage_bucket": "on-spot-mechanic-3f5ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702324940608:android:703e8a21aaa06ef7e564a5",
+        "android_client_info": {
+          "package_name": "com.example.on_spot_mechanic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYb_N7i_d5U5FCZoChbz-pd1RWf-Dx6Ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

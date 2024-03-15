@@ -7,6 +7,7 @@ import 'package:on_spot_mechanic/pages/profile_selection_page.dart';
 import 'package:on_spot_mechanic/pages/welcome.dart';
 
 import 'package:on_spot_mechanic/providers/auth_service.dart';
+import 'package:pinput/pinput.dart';
 //import 'package:on_spot_mechanic/pages/otp_screen.dart';
 
 import '../utilities/button.dart';
@@ -190,44 +191,83 @@ class _RegistrationState extends State<Registration> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text("OTP"),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Form(
-                                key: _formKey1,
-                                child: TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  controller: otpController,
+                          title: Text(
+                            'Verification',
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold),
+                          ),
+                          content: Container(
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Enter the OTP sent to your phone number',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black38,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              )
-                            ],
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Form(
+                                  key: _formKey1,
+                                  child: Pinput(
+                                    defaultPinTheme: PinTheme(
+                                      width: 60,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border:
+                                              Border.all(color: Colors.purple)),
+                                      textStyle: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    showCursor: true,
+                                    keyboardType: TextInputType.number,
+                                    length: 6,
+                                    controller: otpController,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           actions: [
                             TextButton(
-                                onPressed: () {
-                                  if (_formKey1.currentState!.validate()) {
-                                    AuthService.loginWithOtp(
-                                            otp: otpController.text)
-                                        .then((value) {
-                                      if (value == 'Success') {
-                                        Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProfileSelectionPage()));
-                                      } else {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                                SnackBar(content: Text(value)));
-                                      }
-                                    });
-                                  }
-                                },
-                                child: Text('Submit'))
+                              onPressed: () {
+                                if (_formKey1.currentState!.validate()) {
+                                  AuthService.loginWithOtp(
+                                          otp: otpController.text)
+                                      .then((value) {
+                                    if (value == 'Success') {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfileSelectionPage()));
+                                    } else {
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                              SnackBar(content: Text(value)));
+                                    }
+                                  });
+                                }
+                              },
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.purple),
+                              ),
+                            )
                           ],
                         );
                       });

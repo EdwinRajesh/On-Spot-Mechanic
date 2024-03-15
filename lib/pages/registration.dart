@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:on_spot_mechanic/pages/home.dart';
+import 'package:on_spot_mechanic/pages/login.dart';
+import 'package:on_spot_mechanic/pages/profile_selection_page.dart';
+import 'package:on_spot_mechanic/pages/welcome.dart';
 
 import 'package:on_spot_mechanic/providers/auth_service.dart';
 //import 'package:on_spot_mechanic/pages/otp_screen.dart';
@@ -10,7 +12,7 @@ import 'package:on_spot_mechanic/providers/auth_service.dart';
 import '../utilities/button.dart';
 
 class Registration extends StatefulWidget {
-  const Registration({Key? key});
+  const Registration({super.key});
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -41,6 +43,14 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => WelcomePage()));
+            },
+            icon: Icon(Icons.arrow_back)),
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -71,6 +81,45 @@ class _RegistrationState extends State<Registration> {
                   width: double.infinity,
                   child: registerButton(context),
                 ),
+                SizedBox(
+                  height: 16,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        "Have an account?",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black38,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                        },
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -168,7 +217,7 @@ class _RegistrationState extends State<Registration> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    HomePage()));
+                                                    ProfileSelectionPage()));
                                       } else {
                                         Navigator.pop(context);
                                         ScaffoldMessenger.of(context)

@@ -6,7 +6,7 @@ import 'package:on_spot_mechanic/firebase_options.dart';
 import 'package:on_spot_mechanic/pages/welcome.dart';
 import 'package:on_spot_mechanic/providers/auth_service.dart';
 
-import 'pages/home.dart';
+import 'pages/profile_selection_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +38,8 @@ class _CheckUserLoggedInState extends State<CheckUserLoggedIn> {
 
     AuthService.isLoggedIn().then((value) {
       if (value) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => ProfileSelectionPage()));
       } else {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => WelcomePage()));

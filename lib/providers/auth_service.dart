@@ -5,6 +5,14 @@ class AuthService {
   static String verificationId = '';
   static final FirebaseAuth auth = FirebaseAuth.instance;
 
+  static Future sentOtpLogin({
+    required String phoneNumber,
+    required Function errorStep,
+    required Function nextStep,
+  }) async {
+    //await auth.signInWithPhoneNumber();
+  }
+
   static Future sentOtp({
     required String phoneNumber,
     required Function errorStep,
@@ -17,7 +25,6 @@ class AuthService {
       verificationCompleted: (phoneAuthCredential) async {},
       verificationFailed: (error) async {},
       codeSent: (verificationId, forceResendingToken) async {
-        // Use the static variable from the class instead of a local variable
         AuthService.verificationId = verificationId;
         nextStep();
       },
